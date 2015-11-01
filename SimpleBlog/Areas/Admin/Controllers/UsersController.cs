@@ -8,7 +8,7 @@ namespace SimpleBlog.Areas.Admin.Controllers
 {
     public class UsersController : Controller
     {
-        // GET: Admin/Users
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return Content("USERS!");
