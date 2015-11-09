@@ -22,7 +22,6 @@ namespace SimpleBlog.Controllers
         {
             return View(new AuthLogin
             {
-                
             });
         }
 
