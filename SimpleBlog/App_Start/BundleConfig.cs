@@ -15,15 +15,16 @@ namespace SimpleBlog
                 .Include("~/content/styles/bootstrap.css")
                 .Include("~/content/styles/site.css"));
 
-            bundles.Add(new ScriptBundle("~/admin/scripts")
+            bundles.Add(new ScriptBundle("~/Admin/scripts")
                 .Include("~/scripts/jquery-2.1.4.js")
-                .Include("~/scripts/jquery.validate")
+                .Include("~/scripts/jquery.validate.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.js")
-                .Include("~/scripts/bootstrap.js"));
+                .Include("~/scripts/bootstrap.js")
+                .Include("~/areas/admin/scripts/forms.js"));
 
             bundles.Add(new ScriptBundle("~/scripts")
                 .Include("~/scripts/jquery-2.1.4.js")
-                .Include("~/scripts/jquery.validate")
+                .Include("~/scripts/jquery.validate.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.js")
                 .Include("~/scripts/bootstrap.js"));
         }
