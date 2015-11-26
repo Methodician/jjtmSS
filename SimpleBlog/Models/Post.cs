@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using NHibernate.Id.Enhanced;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 
@@ -24,6 +25,10 @@ namespace SimpleBlog.Models
 
         public virtual IList<Tag> Tags { get; set; }
 
+        public Post()
+        {
+            Tags = new List<Tag>();
+        }
 
         public virtual bool IsDeleted => DeletedAt != null;
     }
