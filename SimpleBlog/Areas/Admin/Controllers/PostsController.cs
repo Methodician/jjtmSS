@@ -19,10 +19,22 @@ namespace SimpleBlog.Areas.Admin.Controllers
         {
             var totalPostCount = Database.Session.Query<Post>().Count();
 
-            var currentPostPage = Database.Session.Query<Post>()
-                .OrderByDescending(c => c.CreatedAt)
+            var baseQuery = Database.Session.Query<Post>().OrderByDescending(f => f.CreatedAt); // He added this as an afterthought to stop repeating it in the two below queries
+
+            /*            var postIds = Database.Session.Query<Post>()
+                            .OrderByDescending(c => c.CreatedAt)*/
+            var postIds = baseQuery // This does the pagination but if we had any filtering it woudl handle that as well...
                 .Skip((page - 1) * PostsPerPage)
                 .Take(PostsPerPage)
+                .Select(p => p.Id)
+                .ToArray();
+
+            /*            var currentPostPage = Database.Session.Query<Post>()
+                            .OrderByDescending(c => c.CreatedAt)*/
+            var currentPostPage = baseQuery // This just gets the post data after we figure out which posts to include
+                .Where(p => postIds.Contains(p.Id))
+                .FetchMany(f => f.Tags)
+                .Fetch(f => f.User)
                 .ToList();
 
             return View(new PostsIndex
@@ -109,13 +121,13 @@ namespace SimpleBlog.Areas.Admin.Controllers
             foreach (var toRemove in post.Tags.Where(t => !selectedTags.Contains(t)).ToList()) // Says you have to copy it into a list because you're actually editing the collecthion that this query is based off of - though I'm not sure I understand... The query edits the source in database maybe? That sounds crazy.
                 post.Tags.Remove(toRemove);
             // My reasonable guess - This works! My only mistake was not adding .ToList() to post.Tags... But, I think his method will shave off a few milliseconds by not looping through all possible tags, but rather just the ones that need to be added or removed... Could probably test this by monitoring response time in browser
-/*                        foreach(var tag in post.Tags.ToList())
-                            if (!selectedTags.Contains(tag))
-                                post.Tags.Remove(tag);
+            /*                        foreach(var tag in post.Tags.ToList())
+                                        if (!selectedTags.Contains(tag))
+                                            post.Tags.Remove(tag);
 
-                        foreach(var tag in selectedTags)
-                            if (!post.Tags.Contains(tag))
-                                post.Tags.Add(tag);*/
+                                    foreach(var tag in selectedTags)
+                                        if (!post.Tags.Contains(tag))
+                                            post.Tags.Add(tag);*/
 
 
             Database.Session.SaveOrUpdate(post);
