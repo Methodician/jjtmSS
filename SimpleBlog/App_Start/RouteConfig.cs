@@ -27,6 +27,9 @@ namespace SimpleBlog
 
             routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, namespaces);
 
+            // Order does matter. This has to come after the Home route so the Home route will always match before the Sidebar route (whatever that means)
+            routes.MapRoute("Sidebar", "", new {controller = "Layout", action = "Sidebar"}, namespaces);
+
             //routes.MapRoute(
             //    name: "Default",
             //    url: "{controller}/{action}/{id}",
