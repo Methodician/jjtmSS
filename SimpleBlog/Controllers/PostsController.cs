@@ -15,6 +15,8 @@ namespace SimpleBlog.Controllers
 
         public ActionResult Index(int page = 1)
         {
+/*            throw new Exception("AN ERROR!");*/
+
             var baseQuery =
                 Database.Session.Query<Post>().Where(p => p.DeletedAt == null).OrderByDescending(p => p.CreatedAt);
 
