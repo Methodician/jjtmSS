@@ -29,39 +29,10 @@
                     @Html.Action("Sidebar","Layout")
                 </div>
             </div>
-
             <footer>
                 &copy; @DateTime.UtcNow.Year
             </footer>
         </div>
-        @*        <header>
-            <h1>
-                <a href = "@Url.RouteUrl("home")" >Simple Blog</a>
-                <i class="glyphicon glyphicon-leaf"></i>
-            </h1>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <p>Welcome back, @User.Identity.Name</p>
-                <a href = "@Url.RouteUrl("logout")" >Logout</a>
-
-                if (User.IsInRole("admin"))
-                {
-                    <a href="@Url.Action("index","Posts",new {area="Admin"})">View posts in admin</a>
-                }
-            }
-            else
-            {
-                <a href="@Url.RouteUrl("login")">Login</a>
-            }
-            
-        </header>
-
-        <!-- INSERT VIEW HERE! -->
-        @RenderBody()
-
-        <footer>
-            &copy; @DateTime.Now.Year - Jacob
-        </footer>*@
         @Scripts.Render("~/scripts")
         @RenderSection("Scripts", false)
     </body>
