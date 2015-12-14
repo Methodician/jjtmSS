@@ -7,9 +7,13 @@
 
 
 <div class="panel panel-success" >
-    <div class="panel-heading" >About Me</div>
+    <div class="panel-heading" >What is this?</div>
     <div class="panel-body" >
-        I am a person and I do things.
+        <p>I feel I learned more about real-world web development through this Udemy course than anywhere else thus far.</p>
+        <p></p>
+        <p>Due to the in-depth DIY-all-aspects nature of the course I feel that I really understand how the site works.</p>
+        <p></p>
+        <p>Thus, I intend to continue to build and modify this project to learn and grow, while incidentally blogging about the process and any progress made towards the eventual launch of ScatterSchool at this URL.</p>
     </div>
 </div>
 
@@ -50,9 +54,31 @@
                 </button>
                 <ul class="dropdown-menu" >
                     <li>
-                        <a href="@Url.Action("new", "Posts", new {area="Admin"})">Create Post</a>
+                        <a href="@Url.Action("new", "Posts", new {area = "Admin"})" >Create Post</a>
                     </li>
                 </ul>
+            </div>
+            <div class="btn-group btn-group-sm">
+                <a href="@Url.Action("index", "Users", new {area = "Admin"})" class="btn btn-default">Users</a>
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="@Url.Action("logout", "Auth")">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">To create or edit content:</div>
+        <div class="panel-body">
+            <div class="btn btn-sm">
+                <a href="@Url.Action("index", "Posts", new {area = "Admin"})" class="btn btn-default">Log in</a>
             </div>
         </div>
     </div>
